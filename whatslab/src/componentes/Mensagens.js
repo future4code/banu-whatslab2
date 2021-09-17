@@ -1,11 +1,15 @@
+import React from "react";
+
+
 class EnvioDeMensagens extends React.Component{
-    state = {
-      postagem: [
-        valorInputPessoa= "",
-        valorInputMsm=""
-      ],
-       
-    };
+    // state = {
+    //   postagem: [
+    //     usuario: "",
+    //     msm:""
+    //   ],
+    //   valorInputPessoa: "",
+    //   valorInputMsm: ""
+    // };
 
     adicionarNovaMensagem = () => {
         const novaMensagem = {
@@ -16,11 +20,11 @@ class EnvioDeMensagens extends React.Component{
     }
 
     onChangeInputUsuario = (event) => {
-        this.setState({ valorInputUsuario: event.target.value });
+        this.setState({ usuario: event.target.value });
     }
 
     onChangeInputMsm = (event) => {
-        this.setState({ valorInputMsm: event.target.value });
+        this.setState({ msm: event.target.value });
     }
 
     onClickEnviar = () => {};
@@ -28,7 +32,7 @@ class EnvioDeMensagens extends React.Component{
     render(){
         console.log(this.state);
         return (
-            <div>
+           <AppContainer>
                 <h1>Conversa do WhatsLab</h1>
                 <input
                  placeholder={"Nome completo"}
@@ -40,8 +44,9 @@ class EnvioDeMensagens extends React.Component{
                 value={this.state.msm}
                 onChange={this.onChangeInputMsm}
                />
-
-            </div>
+              <br />
+            <button onClick={this.onClickEnviar}>Enviar</button>
+            </AppContainer>
         )
 
     }
