@@ -1,52 +1,42 @@
-import React from "react";
-
+import React, {Component} from 'react'
 
 class EnvioDeMensagens extends React.Component{
-    // state = {
-    //   postagem: [
-    //     usuario: "",
-    //     msm:""
-    //   ],
-    //   valorInputPessoa: "",
-    //   valorInputMsm: ""
-    // };
+    state = {
+     usuario: '',
+     msm: ''
+    };
 
-    adicionarNovaMensagem = () => {
-        const novaMensagem = {
-            usuario: this.state.valorInputPessoa,
-            msm: this.state.valorInputMsm,
-        };
-        this.setState({postagem: novaMensagem});
-    }
-
-    onChangeInputUsuario = (event) => {
+    onChangeUsuario = (event) => {
         this.setState({ usuario: event.target.value });
     }
 
-    onChangeInputMsm = (event) => {
+    onChangeMsm = (event) => {
         this.setState({ msm: event.target.value });
+
     }
 
-    onClickEnviar = () => {};
+    onClickEnviar = () => {
+        
+    };
+
 
     render(){
         console.log(this.state);
         return (
-           <AppContainer>
-                <h1>Conversa do WhatsLab</h1>
-                <input
-                 placeholder={"Nome completo"}
+           <div>
+               <input
+                 placeholder={'Nome completo'}
                  value={this.state.usuario}
-                 onChange={this.onChangeInputUsuario}
+                 onChange={this.onChangeUsuario}
                 /> 
                 <input
-                placeholder={"Digite sua Mensagem"}
+                placeholder={'Digite sua Mensagem'}
                 value={this.state.msm}
-                onChange={this.onChangeInputMsm}
+                onChange={this.onChangeMsm}
                />
               <br />
             <button onClick={this.onClickEnviar}>Enviar</button>
-            </AppContainer>
+            </div>
         )
 
     }
