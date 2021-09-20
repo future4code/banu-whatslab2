@@ -6,7 +6,7 @@ import EnvioDeMensagens from './componentes/Mensagens';
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div>
         <EnvioDeMensagens />
       </div>
     );

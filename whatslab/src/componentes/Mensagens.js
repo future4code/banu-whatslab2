@@ -1,80 +1,103 @@
-import React, {Component} from 'react'
-import styled from "styled-components"
+import React from 'react';
+import styled from 'styled-components'
 
+const Container = styled.div`
+display:flex-end;
+  flex-direction:center;
+  justify-content:center;
+  align-items: flex-end;
+`
 
+const UsuarioInput = styled.input`
+  background-color: white;
+  border-radius:5px;
+  border: 1px solid lightgray;
+  margin: 3px 8px;
+  width: 80px;
+`
 
+const MsmInput = styled.input`
+  background-color: white;
+  border-radius:5px;
+  border: 1px solid lightgray;
+  margin: 3px 8px 3px 8px;
+  flex-grow: 1;
+`
 
+const EnvioDeMsm = styled.button`
+  background-color: pink;
+  border-radius:5px;
+  margin: 3px 150px 6px 4px;
+  width: 80px;
+  font-weight:bold;
+  font-size:16px;
+`
 
 class EnvioDeMensagens extends React.Component{
     state = {
         
-     usuario:'',
-     msm: '',
+     usuarioDigitando:'',
+     msmDigitando: '',
      mensagem: []
         
     };
 
     onChangeUsuario = (event) => {
-        this.setState({ usuario: event.target.value });
+        this.setState({ usuarioDigitando: event.target.value });
     }
 
     onChangeMsm = (event) => {
-        this.setState({ msm: event.target.value });
+        this.setState({ msmDigitando: event.target.value });
     }
-       onClickEnviar = () => {
-        if (this.state.usuario !== "" && this.state.msm !== "") {
-            const novaMensagem = {
-              usuarioValue: this.state.usuario,
-              msmValue: this.state.msm,
-            };
-            const novoArray = [novaMensagem, ...this.state.msm];
-            this.setState({ messagem: novoArray });
-            this.setState({ msm: "", usuario: "" }); //Area para resetar o campo mensagem e nome
-          } else {
-            alert("Por favor, preencha todos os campos!");
-          }
-        };
 
-        //envio mensagem
-        enviarMensagem = (event) => {
-            if(event.key === "Enter"){
-                this.onClickEnviar();
+    onClickEnviar = () => {
+      if (
+        this.state.usuarioDigitando !== "" && 
+        this.state.msmDigitando !== ""
+        ) {
+          this.setState({
+            msmDigitando: "", 
+            usuarioDigitando: ""
+          })
+          const novoArray = [
+            ...this.state.mensagem, 
+            {
+              usuarioValue: this.state.usuarioDigitando,
+              msmValue: this.state.msmDigitando
             }
-        };
-
-        deletMensagem = (index) => {
-            if(window.confirm("Tem certeza que quer remover essa mensagem?")){
-                const deleteMensagem = this.state.msm;
-                deleteMensagem.splice(index,1);
-                this.setState({msm: deleteMensagem});
-            }
-        };
+          ];
+          this.setState({ 
+            mensagem: novoArray
+          });
+      } else {
+        alert("Por favor, preencha todos os campos!");
+      }
+    }
 
     render(){
         return (
-           <div>
-               <div
-               mensagem={this.state.mensagem}
-               usuario={this.state.usuario}
-               msm={this.state.msm}
-               onDoubleClick={this.deletMensagem}
-               />
-               <div onKeyPress={this.enviarMensagem}/>
-               <input
+           <Container>
+             <div>
+                {this.state.mensagem.map((mensagem, index) => {
+                  return <p key={index}>{mensagem.usuarioValue}: {mensagem.msmValue} </p>
+                })}
+              </div>
+               <UsuarioInput
                  placeholder={'Nome completo'}
-                 value={this.state.usuario}
+                 value={this.state.usuarioDigitando}
                  onChange={this.onChangeUsuario}
-                 required
                 /> 
-                <input
+                <MsmInput
                 placeholder={'Digite sua Mensagem'}
-                value={this.state.msm}
+                value={this.state.msmDigitando}
                 onChange={this.onChangeMsm}
-                required
                />
-              <br />
-            <button onClick={this.onClickEnviar}>Enviar</button>
-            </div>
+            <EnvioDeMsm onClick={this.onClickEnviar} type="submit">
+              Enviar
+            </EnvioDeMsm>
+            
+            </Container>
+
         )
 
     }
