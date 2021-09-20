@@ -1,6 +1,12 @@
 import React from 'react';
 import styled from 'styled-components'
 
+const Container = styled.div`
+display:flex-end;
+  flex-direction:center;
+  justify-content:center;
+  align-items: flex-end;
+`
 
 const UsuarioInput = styled.input`
   background-color: white;
@@ -70,8 +76,8 @@ class EnvioDeMensagens extends React.Component{
 
     render(){
         return (
-           <div>
-              <div>
+           <Container>
+             <div>
                 {this.state.mensagem.map((mensagem, index) => {
                   return <p key={index}>{mensagem.usuarioValue}: {mensagem.msmValue} </p>
                 })}
@@ -89,7 +95,9 @@ class EnvioDeMensagens extends React.Component{
             <EnvioDeMsm onClick={this.onClickEnviar} type="submit">
               Enviar
             </EnvioDeMsm>
-          </div>
+            
+            </Container>
+
         )
 
     }
